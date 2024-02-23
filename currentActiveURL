@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+  <body>
+    <h2>Get the current URL</h2>
+    <p id="demo"></p>
+
+    <button id="button1">Button1</button>
+    <button id="button2">Button2</button>
+    <button id="button3">Button3</button>
+    <script>
+      function changeURL() {
+        debugger;
+        let str = window.location.href;
+        !str.endsWith(".html") &&
+          (str = str.substring(0, str.lastIndexOf("/")));
+
+        let activeElement = document.activeElement;
+        let newURL = str + "/" + activeElement.id;
+        // This will create a new entry in the browser's history, without reloading
+        window.history.pushState({}, "", newURL);
+
+        document.getElementById("demo").innerHTML =
+          "The full URL of this page is:<br>" + newURL;
+      }
+
+      document.querySelectorAll("button").forEach((btn) => {
+        btn.addEventListener("click", changeURL);
+      });
+    </script>
+  </body>
+</html>
